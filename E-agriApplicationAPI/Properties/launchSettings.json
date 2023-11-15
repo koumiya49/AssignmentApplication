@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "E_agriApplicationAPI": {
+    "EcommerceApplication": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
