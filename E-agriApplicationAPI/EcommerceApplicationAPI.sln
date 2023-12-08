@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceApplication.Reposi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceApplication.Common", "..\E-agriApplication.Common\EcommerceApplication.Common.csproj", "{D402D056-D955-4796-9EA3-F1D990354AE6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NunitTesting", "NunitTesting", "{318BD840-53BE-4726-AC18-D86C894361AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTestRepository", "..\NunitTestRepository\NunitTestRepository.csproj", "{A2D9FDEC-6630-4B16-8046-45765794A23C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{D402D056-D955-4796-9EA3-F1D990354AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D402D056-D955-4796-9EA3-F1D990354AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D402D056-D955-4796-9EA3-F1D990354AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D9FDEC-6630-4B16-8046-45765794A23C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D9FDEC-6630-4B16-8046-45765794A23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D9FDEC-6630-4B16-8046-45765794A23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D9FDEC-6630-4B16-8046-45765794A23C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2D9FDEC-6630-4B16-8046-45765794A23C} = {318BD840-53BE-4726-AC18-D86C894361AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87B45BDB-64D5-4819-9684-6EE67BB0830B}

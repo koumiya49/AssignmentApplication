@@ -9,8 +9,16 @@ using Microsoft.IdentityModel.Tokens;
 using static System.Net.WebRequestMethods;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using EcommerceApplicationAPI.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
+var logger = new LoggerConfiguration().WriteTo.File("Logs/Ecommerce_log.txt",rollingInterval:RollingInterval.Day).MinimumLevel.Information().CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ILoginServices, LoginServices>();
 builder.Services.AddScoped<ILoginMapper, LoginMapper>();
@@ -98,7 +106,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionHandler>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseCors("ECommerceApplication");

@@ -23,6 +23,7 @@ namespace EcommerceApplication.Repositories
 
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.GivenName, users.Username));
+            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
             var Credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(

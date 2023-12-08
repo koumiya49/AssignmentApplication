@@ -13,12 +13,11 @@ namespace EcommerceApplication.Repositories
 {
     public interface ILoginRepository
     {
-        Task Add(Users user);
+        Task<bool> Add(Users user);
 
-        Task Remove(Users user);
-        Task Update(Users user);
+        Task<bool> Remove(Users user);
+        Task<bool> Update(Users user);
         Task<List<Users>> GetAllUser();
-       
        Task< Users>GetUserByName(string userName);
        Task< Users> GetUserByEmail(string email);
 
@@ -34,23 +33,23 @@ namespace EcommerceApplication.Repositories
             _unitOfWork = unitOfWork;
           
         }
-        public async Task Add(Users user)
+        public async Task<bool> Add(Users user)
         {
-          _unitOfWork.Add(user);
-          await _unitOfWork.CommitAsync();
+           _unitOfWork.Add(user);
+         return await _unitOfWork.CommitAsync();
         }
-        public async Task Remove(Users user)
+        public async Task<bool> Remove(Users user)
         {
             
             _unitOfWork.Remove(user);
-            await _unitOfWork.CommitAsync();
+            return await _unitOfWork.CommitAsync();
 
         }
-        public async Task Update(Users user)
+        public async Task<bool> Update(Users user)
         {
         
             _unitOfWork.Update(user);
-            await _unitOfWork.CommitAsync();
+            return await _unitOfWork.CommitAsync();
         }
       
         public async Task<List<Users>> GetAllUser()

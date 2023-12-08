@@ -21,7 +21,7 @@ namespace Services
         Task<Users> GetUsersByUserName(string UserName);
         Task<Users> GetUsersByEmail(string Email);
         bool CheckPassword(string Password, string ConfirmPassword);
-        Task< bool> verifyOTP(string otp);
+        Task< bool> VerifyOTP(string otp);
         Task<string> GetToken(string Username);
 
 
@@ -48,12 +48,18 @@ namespace Services
         public async Task<bool> IsAuthenticated(LoginViewModel loginmodel)
         {
             Users validUser = await _loginRepository.GetUserByName(loginmodel.Username);
-
-            if (loginmodel.Password == validUser.Password)
+            if (validUser != null)
             {
-                tokenHandler.CreateToken(validUser);
-              //emailServices.SendEmailMessage(validUser.Email, validUser.Username);
-                return true;
+                if (loginmodel.Password == validUser.Password)
+                {
+                    tokenHandler.CreateToken(validUser);
+                    //emailServices.SendEmailMessage(validUser.Email, validUser.Username);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -63,12 +69,17 @@ namespace Services
         public async Task<string> GetToken(string Username)
         {
             var validUser=await _loginRepository.GetUserByName(Username);
-           var token= tokenHandler.CreateToken(validUser);
-            return token;
+            if (validUser != null)
+            {
+                var token = tokenHandler.CreateToken(validUser);
+                return token;
+            }
+            return "Invalid user";
+          
         }
 
       
-        public async Task<bool> verifyOTP(string otp)
+        public async Task<bool> VerifyOTP(string otp)
         {
            
             if(OTP.Equals(otp))
@@ -84,10 +95,18 @@ namespace Services
             if (existingUser ==null && passwordCheck)
             {
                 var user = _mapper.MapSignUpViewModelToUser(signUpViewModel);
-                await _loginRepository.Add(user);
-                OTP = GenerateOTP();
-                emailServices.SendOTP(user.Email, user.Username, OTP);
-                return true;
+                if(user!=null)
+                {
+                    await _loginRepository.Add(user);
+                    OTP = GenerateOTP();
+                    emailServices.SendOTP(user.Email, user.Username, OTP);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+               
             }
             else
             {

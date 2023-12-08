@@ -24,17 +24,12 @@ namespace EcommerceApplicationAPI.Controllers
         {
             await _addressServices.CreateAddress(address);
             return StatusCode(200, "Address Added Successfully");
-
-
         }
-    
- 
         [HttpDelete, Route("DeleteAddress")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
             await _addressServices.DeleteAddress(id);
             return StatusCode(200, "Address Removed");
-
 
         }
         [HttpGet, Route("GetAllAddress")]
