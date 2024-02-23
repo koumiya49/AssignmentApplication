@@ -63,47 +63,47 @@ namespace NunitTestRepository
             Assert.IsNotNull(result);
         }
         [Test]
-        public async Task RemoveUserUnitTesting()
+        public void RemoveUserUnitTesting()
         {
             ObjectAddToDb();
-            var result= await _loginRepository.Remove(testUserOne);
+            var result=  _loginRepository.Remove(testUserOne);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result);
+            Assert.IsTrue(result.Result);
         }
         [Test]
-        public async Task UpdateUserUnitTesting()
+        public void UpdateUserUnitTesting()
         {
             ObjectAddToDb();
-            var result = await _loginRepository.Update(testUserOne);
+            var result =  _loginRepository.Update(testUserOne);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result);
+            Assert.IsTrue(result.Result);
         }
 
         [Test]
-        public async Task GetAllUserUnitTesting()
+        public void GetAllUserUnitTesting()
         {
             ObjectAddToDb();
-            var result= await _loginRepository.GetAllUser();
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count);
+            var result=  _loginRepository.GetAllUser();
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual(2, result.Result.Count);
         }
         [Test]
-        public async Task GetUserByNameUnittesting()
+        public void GetUserByNameUnittesting()
         {
             ObjectAddToDb();
             string expectedUsername = "menaka";
-            var result = await _loginRepository.GetUserByName(expectedUsername);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedUsername,result.Username);
+            var result =  _loginRepository.GetUserByName(expectedUsername);
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual(expectedUsername,result.Result.Username);
         }
         [Test]
-        public async Task GetUserByEmailUnitTesting()
+        public void GetUserByEmailUnitTesting()
         {
             ObjectAddToDb();
             string Email = "koumiyagowthami232@gmail.com";
-            var result =await _loginRepository.GetUserByEmail(Email);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Email,result.Email);
+            var result =_loginRepository.GetUserByEmail(Email);
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual(Email,result.Result.Email);
         }
     }
 }
